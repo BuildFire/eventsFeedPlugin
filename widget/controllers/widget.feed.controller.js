@@ -332,6 +332,13 @@
               CalenderFeedApi.getFeedEvents(WidgetFeed.data.content.feedUrl, eventFromDate, 0, true, 'ALL').then(successAll, errorAll);
           };
 
+          WidgetFeed.resetCalendar = function() {
+              var selectedDate = new Date(formattedDate);
+              $rootScope.chnagedMonth = selectedDate;
+              WidgetFeed.getEventDate(selectedDate);
+              $scope.$broadcast('refreshDatepickers');
+          }
+
           /*This method is used to load the from Datastore*/
           WidgetFeed.loadMore = function (refreshData) {
               Buildfire.spinner.show();
