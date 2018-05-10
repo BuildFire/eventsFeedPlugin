@@ -59,9 +59,7 @@ describe('Unit: eventsFeedPluginWidget widget app', function () {
     }));
 
     it('it should pass if "getTimeZone" filter returns timezone from given timestamp', function () {
-      it('it should pass if "getTimeZone" filter returns timezone from given timestamp', function () {
-        expect(typeof filter('getTimeZone')).toEqual('function');
-      });
+      expect(typeof filter('getTimeZone')).toEqual('function');
     });
   });
 });
