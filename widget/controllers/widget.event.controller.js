@@ -99,7 +99,7 @@
               {
                 title: event.SUMMARY
                 ,
-                location: event.LOCATION
+                location: event.LOCATION.replace(/\\/g, '')
                 ,
                 notes: event.DESCRIPTION
                 ,
