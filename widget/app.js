@@ -66,6 +66,13 @@
         else return "";
       };
     })
+    .filter('formatLocation', function () {
+
+      return function (input) {
+        var result = input.replace(/\\/g, '');
+        return result;
+      };
+    })
     .run(['Location', '$location', '$rootScope', function (Location, $location, $rootScope) {
       buildfire.navigation.onBackButtonClick = function () {
         var reg = /^\/event/;
