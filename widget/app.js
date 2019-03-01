@@ -69,7 +69,7 @@
     .filter('formatLocation', function () {
 
       return function (input) {
-        var result = input.replace(/\\/g, '');
+        var result = input ? input.replace(/\\/g, '') : "";
         return result;
       };
     })

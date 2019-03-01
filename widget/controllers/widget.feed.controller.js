@@ -466,7 +466,7 @@
                   buildfire.device.calendar.addEvent(
                       {
                           title: event.SUMMARY
-                          , location: event.LOCATION.replace(/\\/g, '')
+                          , location: event.LOCATION ? event.LOCATION.replace(/\\/g, '') : ""
                           , notes: event.DESCRIPTION
                           , startDate: new Date(eventStartDate.getFullYear(), eventStartDate.getMonth(), eventStartDate.getDate(), eventStartDate.getHours(), eventStartDate.getMinutes(), eventStartDate.getSeconds())
                           , endDate: new Date(eventEndDate.getFullYear(), eventEndDate.getMonth(), eventEndDate.getDate(), eventEndDate.getHours(), eventEndDate.getMinutes(), eventEndDate.getSeconds())

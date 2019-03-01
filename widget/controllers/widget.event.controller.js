@@ -99,7 +99,7 @@
               {
                 title: event.SUMMARY
                 ,
-                location: event.LOCATION.replace(/\\/g, '')
+                location: event.LOCATION ? event.LOCATION.replace(/\\/g, '') : ""
                 ,
                 notes: event.DESCRIPTION
                 ,
@@ -224,6 +224,8 @@
           init();
           $scope.$digest();
         });
+
+        $scope.$watch('WidgetEvent.event', () => console.log(WidgetEvent.event), true);
 
         $scope.$on("$destroy", function () {
           DataStore.clearListener();
