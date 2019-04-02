@@ -22,7 +22,7 @@
           class="info-bar titleBarBackgroundTheme padding-top-five padding-bottom-five text-overlay">
         <div class="col-xs-12 text-left pull-left text-overlay">
           <p class="margin-bottom-zero ellipsis titleBarTextAndIcons text-overlay">
-            {{WidgetEvent.event.SUMMARY}}</p>
+            {{WidgetEvent.event.SUMMARY  | decodeIcalComponent }}</p>
 
           <p class="margin-bottom-zero ellipsis text-overlay"
              ng-if="WidgetEvent.event.endDate && !WidgetEvent.event.isAllDay">{{WidgetEvent.event.tmpStartDate |
@@ -38,10 +38,10 @@
       <a class="text-primary" href="javascript:void(0)" ng-click="WidgetEvent.addEventsToCalendar(WidgetEvent.event)">Add to Calendar</a>
     </div>
     <div class="text-left padded padding-bottom-zero clearfix text-overlay">
-      <p ng-if="WidgetEvent.event.SUMMARY.length>42">{{WidgetEvent.event.SUMMARY}}</p>
+      <p ng-if="WidgetEvent.event.SUMMARY.length>42">{{WidgetEvent.event.SUMMARY  | decodeIcalComponent }}</p>
       <hr class="small" ng-if="WidgetEvent.event.DESCRIPTION">
       <p  ng-bind-html="eventDescription" class="break-word"></p>
-      <p class="break-word">{{WidgetEvent.event.LOCATION | formatLocation }}</p>
+      <p class="break-word">{{WidgetEvent.event.LOCATION | decodeIcalComponent }}</p>
     </div>
   </div>
 </div>

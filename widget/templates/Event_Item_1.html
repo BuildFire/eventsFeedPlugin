@@ -17,7 +17,7 @@
       </div>
       <div class="col-xs-9 text-left pull-left text-overlay">
         <p class="margin-bottom-zero ellipsis text-overlay">{{WidgetEvent.event
-          .SUMMARY}}</p>
+          .SUMMARY | decodeIcalComponent }}</p>
         <p class="margin-zero text-overlay"
            ng-if="WidgetEvent.event.endDate && !WidgetEvent.event.isAllDay">{{WidgetEvent.event.tmpStartDate |
           date:'h:mm a'}} - {{WidgetEvent.event.endDate | date : 'h:mm a'}} {{WidgetEvent.event.endDate | getTimeZone}}</p>
@@ -31,9 +31,9 @@
 
     <div
         class="text-left padded padding-bottom-zero clearfix text-overlay">
-      <p ng-if="WidgetEvent.event.SUMMARY.length>35">{{WidgetEvent.event.SUMMARY}}</p>
+      <p ng-if="WidgetEvent.event.SUMMARY.length>35">{{WidgetEvent.event.SUMMARY | decodeIcalComponent }}</p>
       <p  ng-bind-html="eventDescription" class="break-word"></p>
-      <p class="break-word">{{WidgetEvent.event.LOCATION | formatLocation }}</p>
+      <p class="break-word">{{WidgetEvent.event.LOCATION | decodeIcalComponent }}</p>
     </div>
   </div>
 </div>

@@ -51,6 +51,15 @@
         var getProxyServerUrl = function () {
           return PROXY_SERVER.secureServerUrl;
         };
+        var decodeIcalComponent = function (component) {
+          if (!component) return "";
+          return component
+            .replace(/\\,/g, ',') // decode comma
+            .replace(/\\;/g, ';') // decode semi
+            .replace(/\\\\/g, "\\") // decode backslash
+            .replace(/\\n/g, ' ') // decode newline
+            .replace(/\\N/g, ' ') // decode newline
+        }
         var getSingleEventDetails = function (url, eventIndex, date) {
           var deferred = $q.defer();
           if (!url) {
@@ -135,6 +144,7 @@
             return deferred.promise;
         };
         return {
+          decodeIcalComponent: decodeIcalComponent,
           getSingleEventDetails: getSingleEventDetails,
           getFeedEvents: getFeedEvents
         };

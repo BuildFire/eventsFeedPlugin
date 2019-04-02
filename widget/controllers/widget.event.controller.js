@@ -97,11 +97,11 @@
           if (buildfire.device && buildfire.device.calendar && WidgetEvent.getAddedEventToLocalStorage(event.UID) == -1) {
             buildfire.device.calendar.addEvent(
               {
-                title: event.SUMMARY
+                title: CalenderFeedApi.decodeIcalComponent(event.SUMMARY)
                 ,
-                location: event.LOCATION ? event.LOCATION.replace(/\\/g, '') : ""
+                location: CalenderFeedApi.decodeIcalComponent(event.LOCATION)
                 ,
-                notes: event.DESCRIPTION
+                notes: CalenderFeedApi.decodeIcalComponent(event.DESCRIPTION)
                 ,
                 startDate: new Date(eventStartDate.getFullYear(), eventStartDate.getMonth(), eventStartDate.getDate(), eventStartDate.getHours(), eventStartDate.getMinutes(), eventStartDate.getSeconds())
                 ,

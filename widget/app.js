@@ -66,11 +66,21 @@
         else return "";
       };
     })
-    .filter('formatLocation', function () {
+    .filter('decodeIcalComponent', function () {
 
       return function (input) {
-        var result = input ? input.replace(/\\/g, '') : "";
+        var result = input ? decode(input) : '';
         return result;
+      };
+      // ical encoding https://tools.ietf.org/html/rfc5545 page 45
+      function decode(component) {
+        if (!component) return "";
+        return component
+          .replace(/\\,/g, ',') // decode comma
+          .replace(/\\;/g, ';') // decode semi
+          .replace(/\\\\/g, '\\') // decode backslash
+          .replace(/\\n/g, ' ') // decode newline
+          .replace(/\\N/g, ' ') // decode newline
       };
     })
     .run(['Location', '$location', '$rootScope', function (Location, $location, $rootScope) {
