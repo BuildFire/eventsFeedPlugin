@@ -127,6 +127,9 @@
                                 console.log("end getFeedEvents: " + new Date());
                             });
                         });
+                }else{
+                  finalResults.events=[];
+                  deferred.resolve(finalResults);
                 }
             }).error(function (error) {
                 return deferred.reject(error);
