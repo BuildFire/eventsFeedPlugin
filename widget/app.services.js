@@ -123,6 +123,16 @@
                                 for (var i = 0; i<results.length;i++) {
                                     finalResults.events = finalResults.events.concat(results[i].data.events);
                                 }
+                                //duplicated events - filter
+                                finalResults.events=finalResults.events.filter((v,i,a)=>a.findIndex(t=>(
+                                  t.UID === v.UID && 
+                                  t.SUMMARY === v.SUMMARY &&
+                                  t.LOCATION === v.LOCATION &&
+                                  t.startDate === v.startDate &&
+                                  t.endDate === v.endDate &&
+                                  t.DESCRIPTION === v.DESCRIPTION))===i);
+                                //duplicated events - filter
+                                
                                 deferred.resolve(finalResults);
                                 console.log("end getFeedEvents: " + new Date());
                             });
