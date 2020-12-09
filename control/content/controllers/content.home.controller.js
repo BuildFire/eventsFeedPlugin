@@ -25,6 +25,7 @@
         ContentHome.validLinkSuccess = false;
         ContentHome.validLinkFailure = false;
         ContentHome.validLinkNoEvents = false;
+        ContentHome.largePayload = false;
         var tmrDelay = null;
 
         var updateMasterItem = function (data) {
@@ -157,6 +158,18 @@
          * Go pull any previously saved data
          * */
         init();
+
+        buildfire.messaging.onReceivedMessage = function(message) {
+          switch(message.cmd) {
+            case "PAYLOAD_TOO_LARGE":
+              $timeout(function () {
+                ContentHome.largePayload = true;
+              },0);
+              return;
+            default:
+              return;
+          }
+        }
 
         /*
          * watch for changes in data and trigger the saveDataWithDelay function on change

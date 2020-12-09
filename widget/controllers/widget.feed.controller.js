@@ -574,13 +574,15 @@
           $scope.today();
 
           $scope.getDayClass = function (date, mode) {
-              var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+              var dayToCheck = new Date(date ? date : new Date()).setHours(0, 0, 0, 0);
               var currentDay;
-              for (var i = 0; i < WidgetFeed.eventsAll.length; i++) {
-                  currentDay = new Date(WidgetFeed.eventsAll[i].startDate).setHours(0, 0, 0, 0);
-                  if (dayToCheck === currentDay) {
-                      return 'eventDate avoid-clicks-none';
-                  }
+              if(WidgetFeed.eventsAll) {
+                for (var i = 0; i < WidgetFeed.eventsAll.length; i++) {
+                    currentDay = new Date(WidgetFeed.eventsAll[i].startDate).setHours(0, 0, 0, 0);
+                    if (dayToCheck === currentDay) {
+                        return 'eventDate avoid-clicks-none';
+                    }
+                }
               }
           };
 

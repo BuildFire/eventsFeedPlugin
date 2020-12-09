@@ -74,6 +74,7 @@
         };
         var getFeedEvents = function (url, date, offset, refreshData, requestType) {
             console.log("start getFeedEvents: " + new Date());
+            var requestStart = +new Date();
             var deferred = $q.defer();
             if (!url) {
                 deferred.reject(new Error('Undefined feed url'));
@@ -134,6 +135,14 @@
                                 //duplicated events - filter
                                 
                                 deferred.resolve(finalResults);
+                                var requestEnd = +new Date() - requestStart;
+                                
+                                // if it took longer than 3s to load
+                                if(requestEnd > 3000) {
+                                  buildfire.messaging.sendMessageToControl({
+                                    cmd: "PAYLOAD_TOO_LARGE",
+                                  });
+                                }
                                 console.log("end getFeedEvents: " + new Date());
                             });
                         });
