@@ -112,6 +112,7 @@
         ContentHome.validateCalUrl = function () {
           function successCallback(resp) {
             Buildfire.spinner.hide();
+            ContentHome.largePayload = false;
             if (resp && resp.events) {
               ContentHome.validLinkSuccess = true;
               $timeout(function () {
