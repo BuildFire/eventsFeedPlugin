@@ -103,6 +103,7 @@
                                     return e;
                                 }).then(function (r) {
                                     postObj.offset = i;
+                                    buildfire.spinner.show();
                                     return $http({
                                         method: "post",
                                         url: getProxyServerUrl() + '/events',
@@ -136,7 +137,8 @@
                                 
                                 deferred.resolve(finalResults);
                                 var requestEnd = +new Date() - requestStart;
-                                
+                                buildfire.spinner.hide();
+                              
                                 // if it took longer than 3s to load
                                 if(requestEnd > 3000) {
                                   buildfire.messaging.sendMessageToControl({
