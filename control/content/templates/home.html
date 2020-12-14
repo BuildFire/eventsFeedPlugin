@@ -9,7 +9,7 @@
              ng-change="ContentHome.clearData()"/>
     </div>
     <div class="col-md-4 pull-right">
-      <button class="btn btn-primary pull-right stretch"
+      <button class="btn btn-success pull-right stretch"
               ng-click="ContentHome.validateCalUrl()"
               ng-disabled="!ContentHome.calUrl">Validate
       </button>
@@ -28,6 +28,9 @@
     <div class="alert alert-sm text-center alert-danger margin-top-ten" ng-show="ContentHome.validLinkFailure"
         >There is
       an error with this feed. Please check and try again.
+    </div>
+    <div class="alert alert-sm alert-warning margin-top-ten" ng-show="ContentHome.largePayload">
+      Warning: Your calendar feed seems to be very large and will load slowly for your users. Please consider deleting old and redundant events to prevent longer load times
     </div>
   </div>
 </div>
