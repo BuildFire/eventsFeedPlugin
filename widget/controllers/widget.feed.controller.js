@@ -8,7 +8,7 @@
           var currentFeedUrl = "";
           var currentDate = new Date();
           var currentLayout="";
-          var formattedDate = currentDate.getFullYear() + "-" + moment(currentDate).format("MM") + "-" + ("0" + currentDate.getDate()).slice(-2) + "T00:00:00"+ moment(new Date()).format("Z");;
+          var formattedDate = currentDate.getFullYear() + "-" + moment(currentDate).format("MM") + "-" + ("0" + currentDate.getDate()).slice(-2) + "T00:00:00";;
           var timeStampInMiliSec = +new Date(formattedDate);
           var eventFromDate;
           $rootScope.deviceHeight = window.innerHeight;
@@ -26,8 +26,8 @@
               return moment(date).startOf('month').format('DD');
           };
           var configureDate = new Date();
-          var eventRecEndDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getLastDateOfMonth(configureDate) + "T23:59:59" + moment(new Date()).format("Z");
-          var eventStartDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getFirstDateOfMonth(configureDate) + "T00:00:00" + moment(new Date()).format("Z");
+          var eventRecEndDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getLastDateOfMonth(configureDate) + "T23:59:59";
+          var eventStartDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getFirstDateOfMonth(configureDate) + "T00:00:00";
           var eventRecEndDateCheck = null;
 
           configureDate = new Date();
@@ -416,7 +416,7 @@
                       WidgetFeed.eventClassToggle=false;
                       WidgetFeed.loadMore(false);
                   } else if (currentFeedUrl != WidgetFeed.data.content.feedUrl) {
-                      formattedDate = currentDate.getFullYear() + "-" + moment(currentDate).format("MM") + "-" + ("0" + currentDate.getDate()).slice(-2) + "T00:00:00" + moment(new Date()).format("Z");
+                      formattedDate = currentDate.getFullYear() + "-" + moment(currentDate).format("MM") + "-" + ("0" + currentDate.getDate()).slice(-2) + "T00:00:00";
                       timeStampInMiliSec = +new Date(formattedDate);
                       currentFeedUrl = WidgetFeed.data.content.feedUrl;
                       WidgetFeed.events = [];
@@ -516,13 +516,13 @@
           WidgetFeed.getEventDate = function (date) {
               $(".text-muted").parent().addClass('disableCircle');
               WidgetFeed.flag = false;
-              formattedDate = date.getFullYear() + "-" + moment(date).format("MM") + "-" + ("0" + date.getDate()).slice(-2) + "T00:00:00" + WidgetFeed.getUTCZone();
+              formattedDate = date.getFullYear() + "-" + moment(date).format("MM") + "-" + ("0" + date.getDate()).slice(-2) + "T00:00:00";
               timeStampInMiliSec = +new Date(formattedDate);
               if (!WidgetFeed.clickEvent) {
                   if ($rootScope.chnagedMonth == undefined) {
                       eventStartDate = formattedDate;
                       var tempDt = new Date(eventStartDate);
-                      eventRecEndDate = new Date(tempDt.setTime( tempDt.getTime() + 1 * 86399999 ));
+                      eventRecEndDate = new Date(tempDt).setHours(23, 59);
                       WidgetFeed.clickEvent = true;
                       WidgetFeed.events = null;
                       WidgetFeed.busy = false;
@@ -531,11 +531,11 @@
                       WidgetFeed.loadMore(false);
                   } else {
                       configureDate = new Date($rootScope.chnagedMonth);
-                      eventStartDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getFirstDateOfMonth(configureDate) + "T00:00:00" + moment(new Date()).format("Z");
-                      eventRecEndDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getLastDateOfMonth(configureDate) + "T23:59:59" + moment(new Date()).format("Z");
-                      WidgetFeed.calledDate = +new Date(configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-01" + "T00:00:00" + moment(new Date()).format("Z"));
+                      eventStartDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getFirstDateOfMonth(configureDate) + "T00:00:00";
+                      eventRecEndDate = configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-" + WidgetFeed.getLastDateOfMonth(configureDate) + "T23:59:59";
+                      WidgetFeed.calledDate = +new Date(configureDate.getFullYear() + "-" + moment(configureDate).format("MM") + "-01" + "T00:00:00");
                       if (eventRecEndDateCheck != eventRecEndDate) {
-                          formattedDate = currentDate.getFullYear() + "-" + moment(currentDate).format("MM") + "-" + ("0" + currentDate.getDate()).slice(-2) + "T00:00:00" + moment(new Date()).format("Z");
+                          formattedDate = currentDate.getFullYear() + "-" + moment(currentDate).format("MM") + "-" + ("0" + currentDate.getDate()).slice(-2) + "T00:00:00";
                           timeStampInMiliSec = +new Date(eventStartDate);
                           eventRecEndDateCheck = eventRecEndDate;
                       }
