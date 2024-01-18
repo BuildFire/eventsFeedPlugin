@@ -193,6 +193,46 @@
               }
               return formattedRule;
           };
+          // this function will filter out the repeating events that have been updated
+          // it will skip all previous versions, and only show the latest version of the event
+          const filterUpdatedEvents = (events) => {
+            let latestEvents = {};
+            events.forEach(event => {
+                let uid = event.UID;
+                // trackingId is a random number to make sure we don't have duplicate keys in the DOM
+                event.trackingId = uid + Math.random();
+                let newStartDate = new Date(event.startDate);
+                let recurrenceId = 0;
+                let oldRecurrenceId = 0;
+                // check if this event has been seen before
+                // the key is the UID + the date of the event
+                let storedRecored = latestEvents[uid + `${newStartDate.getDate()}-${newStartDate.getMonth()}-${newStartDate.getFullYear()}`];
+
+                for (const key in event) {
+                    if (key.startsWith('RECURRENCE-ID')) {
+                        recurrenceId = event[key];
+                    }
+                }
+                if (storedRecored) {
+                    for (const key in storedRecored) {
+                        if (key.startsWith('RECURRENCE-ID')) {
+                            oldRecurrenceId = event[key];
+                        }
+                    }
+                }
+
+                // to add the event to the list, it must be the first time we see it
+                // or it must be a newer version of the event
+                if (!storedRecored
+                    || (recurrenceId && !oldRecurrenceId)
+                    || (recurrenceId && oldRecurrenceId && Number(recurrenceId.substr(0, 8)) > Number(oldRecurrenceId.substr(0, 8)) && Number(recurrenceId.substr(9, 15)) > Number(oldRecurrenceId.substr(9, 15)))
+                    ) {
+                        latestEvents[uid + `${newStartDate.getDate()}-${newStartDate.getMonth()}-${newStartDate.getFullYear()}`] = event; // store the event
+                }
+            });
+            // return the values of the object
+            return Object.values(latestEvents);
+          };
           //this function will add repeating events to the result array to the repeat_until date passed in
           var expandRepeatingEvents = function (result, repeat_until, AllEvent) {
 
@@ -285,7 +325,6 @@
                           temp_result.tmpStartDate = temp_result.startDate;
                           temp_result.startDate = Date.parse(dates[j]);
                           temp_result.endDate = temp_result.startDate + eventDuration;
-                          temp_result.UID = temp_result.UID + String(temp_result.startDate) + String(temp_result.endDate)
                           if (temp_result.startDate >= +new Date(eventStartDate) && temp_result.startDate <= +new Date(eventRecEndDate))
                               if (AllEvent)
                                   repeat_results.push(temp_result);
@@ -314,13 +353,15 @@
                         startDate += 86400000;
                         while (startDate < endDate) {
                             if (startDate >= +new Date(eventStartDate) && startDate <= +new Date(eventRecEndDate) && (AllEvent || startDate >= timeStampInMiliSec)) {
-                                repeat_results.push({...result.events[i], startDate: new Date(startDate), UID: "_id" + Date.now() + Math.random()});
+                                repeat_results.push({...result.events[i], startDate: new Date(startDate)});
                             }    
                             startDate += 86400000;
                         }
                       }
 
               }}
+              //  filter out the repeating events that have been updated
+              repeat_results = filterUpdatedEvents(repeat_results);
               //sort the list by start date
               repeat_results.sort(function (a, b) {
                   if (a.startDate > b.startDate) {
