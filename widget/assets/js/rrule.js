@@ -1884,7 +1884,7 @@
         rrule._iter(iterResult)
       })
 
-      var res = iterResult._result
+      var res = iterResult._result.filter(date => !this._exdate.find(exdate => new Date(exdate).setHours(0,0,0) === new Date(date).setHours(0,0,0)))
       dateutil.sort(res)
       switch (iterResult.method) {
         case 'all':
