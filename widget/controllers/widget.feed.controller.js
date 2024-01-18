@@ -227,7 +227,7 @@
                     || (recurrenceId && !oldRecurrenceId)
                     || (recurrenceId && oldRecurrenceId && Number(recurrenceId.substr(0, 8)) > Number(oldRecurrenceId.substr(0, 8)) && Number(recurrenceId.substr(9, 15)) > Number(oldRecurrenceId.substr(9, 15)))
                     ) {
-                        latestEvents[uid + `${newStartDate.getDate()}-${newStartDate.getMonth()}-${newStartDate.getFullYear()}`] = event; // store the event
+                        latestEvents[uid + `${newStartDate.getDate()}-${newStartDate.getMonth()}-${newStartDate.getFullYear()}`] = event;
                 }
             });
             // return the values of the object
