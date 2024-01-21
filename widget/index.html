@@ -25,6 +25,8 @@
   <!-- App -->
   <script src="../../../scripts/angular/ng-infinite-scroll.custom.js"
           type="application/javascript"></script>
+  <script src="utils/nanoid.js"></script>
+  <script src="utils/index.js"></script>
   <script src="assets/js/moment.min.js"></script>
   <script src="assets/js/jstz.min.js" type="application/javascript"></script>
   <script src="assets/js/moment-timezone.min.js" type="application/javascript"></script>
@@ -68,7 +70,7 @@
                        ng-swipe-left="WidgetFeed.addEvents($event, $index, false)"
                        custom-class="getDayClass(date, mode)"
                        ng-class="{'active' : WidgetFeed.swiped[$index]}"
-                       ng-repeat="event in WidgetFeed.events track by event.trackingId">
+                       ng-repeat="event in WidgetFeed.events track by event.id">
                     <div class="calendar-icon text-center bg-primary"
                          ng-click="WidgetFeed.addEventsToCalendar(event, $index)">
                       <span class="icon icon-calendar-check"></span>
