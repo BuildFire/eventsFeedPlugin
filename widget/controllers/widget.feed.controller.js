@@ -285,7 +285,6 @@
                           temp_result.tmpStartDate = temp_result.startDate;
                           temp_result.startDate = Date.parse(dates[j]);
                           temp_result.endDate = temp_result.startDate + eventDuration;
-                          temp_result.UID = temp_result.UID + String(temp_result.startDate) + String(temp_result.endDate)
                           if (temp_result.startDate >= +new Date(eventStartDate) && temp_result.startDate <= +new Date(eventRecEndDate))
                               if (AllEvent)
                                   repeat_results.push(temp_result);
@@ -314,13 +313,15 @@
                         startDate += 86400000;
                         while (startDate < endDate) {
                             if (startDate >= +new Date(eventStartDate) && startDate <= +new Date(eventRecEndDate) && (AllEvent || startDate >= timeStampInMiliSec)) {
-                                repeat_results.push({...result.events[i], startDate: new Date(startDate), UID: "_id" + Date.now() + Math.random()});
+                                repeat_results.push({...result.events[i], startDate: new Date(startDate)});
                             }    
                             startDate += 86400000;
                         }
                       }
 
               }}
+              // filter out the repeating events that have been updated
+              repeat_results = utils.filterUpdatedEvents(repeat_results);
               //sort the list by start date
               repeat_results.sort(function (a, b) {
                   if (a.startDate > b.startDate) {
