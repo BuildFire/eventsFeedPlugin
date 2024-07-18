@@ -214,7 +214,7 @@
                 content: {},
                 design: {}
               };
-              var dummyData = { url: "http://ical.mac.com/ical/US32Holidays.ics" };
+              var dummyData = { url: "https://calendar.google.com/calendar/ical/en.usa%23holiday%40group.v.calendar.google.com/public/basic.ics" };
               WidgetEvent.data.content.feedUrl = dummyData.url;
               WidgetEvent.data.design.itemDetailsLayout = LAYOUTS.itemDetailsLayout[0].name;
               getEventDetails(WidgetEvent.data.content.feedUrl);

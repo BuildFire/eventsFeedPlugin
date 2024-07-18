@@ -53,7 +53,7 @@
                   if (tmrDelay)clearTimeout(tmrDelay);
                 }
                 else {
-                  var dummyData = {url: "https://ical.mac.com/ical/US32Holidays.ics"};
+                  var dummyData = {url: "https://calendar.google.com/calendar/ical/en.usa%23holiday%40group.v.calendar.google.com/public/basic.ics"};
                   ContentHome.data = angular.copy(_data);
                   ContentHome.calUrl  = dummyData.url;
                   updateMasterItem(ContentHome.data);
