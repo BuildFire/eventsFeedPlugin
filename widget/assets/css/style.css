@@ -1,4 +1,8 @@
 /* Plugin CSS */
+
+body {
+    padding-top: var(--bf-safe-area-inset-top) !important;
+}
 .places-plugin .location-map .map-holder,
 .events-plugin .location-map .map-holder{
 	min-height:280px;
