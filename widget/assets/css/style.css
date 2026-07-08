@@ -79,8 +79,7 @@ body {
 	position:absolute;
 	bottom:0;
 	top:300px;
-	overflow-x:hidden;
-	overflow-y:auto;
+	padding-bottom: var(--bf-safe-area-inset-bottom);
 	width:100%;
 }
 .events-plugin.long-month .event-list{
@@ -152,6 +151,9 @@ body {
 }
 .events-plugin .event-list .event-item.active{
 	right:-71px;
+}
+.holder.event-details-holder {
+	padding-bottom: var(--bf-safe-area-inset-bottom) !important;
 }
 .holder .events-plugin .info-text{
 	position:absolute;
